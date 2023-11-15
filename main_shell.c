@@ -8,7 +8,7 @@
  */
 int main(int argc __attribute__((unused)), char **argv)
 {
-	int cnt, result;
+	int cnt, results;
     char *line = NULL;
 	size_t length = 0;
     char *tokens[buffer];
