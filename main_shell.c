@@ -91,6 +91,7 @@ int exec_command(int *exit_status, char *fullpath, char *tokens[])
 	int stats;
 	pid_t child;
 	child = fork();
+
 	if (child == -1)
 	{
 		perror("fork");
@@ -124,8 +125,8 @@ int exec_command(int *exit_status, char *fullpath, char *tokens[])
  */
 int _ch(char **argv, char **tokens, char **fullpath, int *exit_status)
 {
- 	char newline = '\n';
- 	char *path = _getenv("PATH");
+	char newline = '\n';
+	char *path = _getenv("PATH");
 	if (access(tokens[0], X_OK) == -1)
 	{
 		*fullpath = _which(tokens[0], path);
