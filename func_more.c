@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell_props.h"
 /**
  * _which - Entry point
  * Description: 'to find the full path name'
