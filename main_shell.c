@@ -37,7 +37,7 @@ int main(int argc __attribute__((unused)), char **argv)
 		results = _ch(argv, tokens, &fullpath, &exit_status);
 		if (results == 1)
 			break;
-		else if (result == 2)
+		else if (results == 2)
 			continue; 
 		results = exec_command(&exit_status, fullpath, tokens);
 		if (results == 1)
