@@ -19,32 +19,32 @@ int main(int argc __attribute__((unused)), char **argv)
 	{
 		results = handle_prompts(&length, &line);
 		if (results == 1)
-			break; 
+			break;
 		cnt = 0;
 		tokens[cnt] = strtok(line, " \t\n");
 		while (tokens[cnt] != NULL)
 		{
 			cnt++;
 			tokens[cnt] = strtok(NULL, " \t\n");
-		} 
+		}
 		fullpath = tokens[0];
 		tokens[cnt] = NULL;
 		results = check_builtins(cnt, tokens, &exit_status, argv);
 		if (results == 1)
-			break; 
+			break;
 		else if (results == 2)
 			continue;
 		results = _ch(argv, tokens, &fullpath, &exit_status);
 		if (results == 1)
 			break;
 		else if (results == 2)
-			continue; 
+			continue;
 		results = exec_command(&exit_status, fullpath, tokens);
 		if (results == 1)
-			break; 
+			break;
 		else if (results == 2)
-			continue; 
-		}
+			continue;
+	}
 	free(line);
 	return (exit_status);
 }
@@ -66,15 +66,15 @@ int handle_prompts(size_t *length, char **line)
 	if (is_interactive)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
-	} 
+	}
 	bytes_read = getline(line, length, stdin);
 	if (bytes_read == -1)
 	{
 		if (is_interactive)
 		{
 			write(STDOUT_FILENO, &newline, 1);
-		} 
-	return (1);
+		}
+		return (1);
 	}
 	return (0);
 }
