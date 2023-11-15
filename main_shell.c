@@ -9,9 +9,9 @@
 int main(int argc __attribute__((unused)), char **argv)
 {
 	int cnt, results;
-   	char *line = NULL;
+	char *line = NULL;
 	size_t length = 0;
-   	char *tokens[buffer];
+	char *tokens[buffer];
 	int exit_status = 0;
 	char *fullpath;
 
@@ -19,7 +19,7 @@ int main(int argc __attribute__((unused)), char **argv)
 	{
 		results = handle_prompts(&length, &line);
 		if (results == 1)
-		break; 
+			break; 
 		cnt = 0;
 		tokens[cnt] = strtok(line, " \t\n");
 		while (tokens[cnt] != NULL)
@@ -28,7 +28,7 @@ int main(int argc __attribute__((unused)), char **argv)
 			tokens[cnt] = strtok(NULL, " \t\n");
 		} 
 		fullpath = tokens[0];
-        	tokens[cnt] = NULL;
+		tokens[cnt] = NULL;
 		results = check_builtins(cnt, tokens, &exit_status, argv);
 		if (results == 1)
 			break; 
@@ -38,16 +38,16 @@ int main(int argc __attribute__((unused)), char **argv)
 		if (results == 1)
 			break;
 		else if (results == 2)
-		continue; 
+			continue; 
 		results = exec_command(&exit_status, fullpath, tokens);
 		if (results == 1)
 			break; 
 		else if (results == 2)
-		continue; 
+			continue; 
 		}
 	free(line);
 	return (exit_status);
-	} 
+} 
 
 
 
@@ -60,20 +60,20 @@ int main(int argc __attribute__((unused)), char **argv)
 int handle_prompts(size_t *length, char **line)
 {
 	int is_interactive = isatty(STDIN_FILENO);
-    	char newline = '\n';
-    	ssize_t bytes_read;
+	char newline = '\n';
+	ssize_t bytes_read;
 
 	if (is_interactive)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
-		} 
+	} 
 	bytes_read = getline(line, length, stdin);
 	if (bytes_read == -1)
 	{
 		if (is_interactive)
 		{
 			write(STDOUT_FILENO, &newline, 1);
-			} 
+		} 
 	return (1);
 	}
 	return (0);
@@ -96,26 +96,25 @@ int exec_command(int *exit_status, char *fullpath, char *tokens[])
 	{
 		perror("fork");
 		return (1);
-		} 
+	} 
 	if (child == 0)
 	{
 		execve(fullpath, tokens, environ);
 		*exit_status = 2;
 		perror("execve");
 		exit(*exit_status);
-		} 
-	else
+	} else
 	{
 		wait(&stats);
 		if (WIFEXITED(stats))
 		{
 			*exit_status = WEXITSTATUS(stats);
-			} 
 		} 
+	} 
 	if (fullpath != tokens[0])
 		free(fullpath);
 	return (0);
-	} 
+		} 
 
 /**
  * _ch - checks for executable file errors
@@ -127,8 +126,8 @@ int exec_command(int *exit_status, char *fullpath, char *tokens[])
  */
 int _ch(char **argv, char **tokens, char **fullpath, int *exit_status)
 {
-   	char newline = '\n';
-    	char *path = _getenv("PATH");
+ 	char newline = '\n';
+ 	char *path = _getenv("PATH");
 
 	if (access(tokens[0], X_OK) == -1)
 	{
@@ -160,7 +159,7 @@ int _ch(char **argv, char **tokens, char **fullpath, int *exit_status)
 int check_builtins(int cnt, char **tokens, int *exit_status, char **argv)
 {
 	char newline = '\n';
-    	char **env = environ;
+	char **env = environ;
 
 	if (cnt < 1)
 	{
